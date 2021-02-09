@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.example.demo.dao.memberDao">
+ 
+    <!-- 회원가입 -->
+ 	<insert id="insertMember" parameterType="com.example.demo.dto.BlogDto">
+ 	INSERT INTO BLOGMEMBER
+ 	(ID,PWD,NAME)
+ 	VALUES
+ 	(#{id},#{pwd},#{name})
+ 	</insert>
+ 	
+ 	<!-- 로그인 --> 
+ 	<select id="loginMember" parameterType="com.example.demo.dto.BlogDto" resultType="com.example.demo.dto.BlogDto">
+ 	SELECT ID,PWD,NAME
+ 	FROM BLOGMEMBER
+ 	WHERE
+ 	ID=#{id} AND PWD=#{pwd}
+ 	</select>
+ 	 
+	<!-- 게시글작성 -->
+	<insert id="insertContents" parameterType="com.example.demo.dto.ContentsDto">
+	INSERT INTO BLOGCONTENTS
+	(CONSEQ,ID,TITLE,CONTENTS,INDATE)
+	VALUES
+	(CONSEQ.NEXTVAL,#{id},#{title},#{contents},sysdate)
+	</insert> 	 
+	
+	<!-- 게시글 목록 -->
+	<select id="selectContentsAll" resultType="com.example.demo.dto.ContentsDto">
+	SELECT ID,CONSEQ,TITLE,CONTENTS,INDATE FROM BLOGCONTENTS
+	</select>
+	
+	<!-- 상세글보기 -->
+	<select id="selectContentsDetail" parameterType="String" resultType="com.example.demo.dto.ContentsDto">
+	SELECT ID,CONSEQ,TITLE,CONTENTS,INDATE FROM BLOGCONTENTS
+	WHERE CONSEQ=#{conSeq}
+	</select>
+	
+	<delete id="deleteContents" parameterType="String">
+	
+	DELETE BLOGCONTENTS
+	WHERE
+	CONSEQ=#{conseq}
+	
+	</delete>
+	
+</mapper>
+
+
+
+
