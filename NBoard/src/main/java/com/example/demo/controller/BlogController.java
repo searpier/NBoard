@@ -16,6 +16,7 @@ import com.example.demo.service.BlogService;
 @Controller
 public class BlogController {
 
+	
 	@Autowired
 	private BlogService bs;
 
